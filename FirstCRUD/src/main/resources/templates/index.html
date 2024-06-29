@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Home page</title>
+    <script th:src="@{/webjars/jquery/ 3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.2/js/bootstrap.min.js}"></script>
+    <title>WebJars Demo</title>
+    <link rel="stylesheet"
+          th:href="@{/webjars/bootstrap/4.1.2/css/bootstrap.min.css}" />
 </head>
 <body>
-<h1>it's your Home Page bodie  </h1>
+<div class="container"><br/>
+    <div class="alert alert-danger">
+        <a href="#" class="close" data-dismiss="alert"
+           aria-label="close">×</a>
+        <strong>Success!</strong> It is working as we expected.
+    </div>
+</div>
 </body>
 </html>
