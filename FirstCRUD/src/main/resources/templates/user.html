@@ -8,12 +8,14 @@
 </head>
 <body>
 <div>
+    <a href="/adduser">new user</a>
     <table class="table">
         <thead class="table-header">
         <tr>
-            <th>UserName</th>
-            <th>UserLastName</th>
-            <th>UserEmail</th>
+            <th>Name</th>
+            <th>LastName</th>
+            <th>Email</th>
+            <th>Traitement</th>
         </tr>
         </thead>
         <tbody>
@@ -21,6 +23,8 @@
             <td th:text="${user.firstName}"></td>
             <td th:text="${user.lastName}"></td>
             <td th:text="${user.email}"></td>
+            <td><a  class="btn btn-primary" th:href="@{/'edituser' + ${user.id}}"> edit User </a>
+                <a th:href="@{/'delete' + ${user.id}}" class="btn btn-danger"> delete </a></td>
         </tr>
         </tbody>
     </table>

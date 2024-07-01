@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.2/css/bootstrap.min.css}" />
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.2/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<h1 class="text-center my-4">Add User</h1>
+<div class="container d-flex justify-content-center align-items-center ">
+    <form th:action="@{/saveuser}" method="post" th:objet="${user}" class="w-50 p-4 border border-primary shadow" >
+        <div class="form-group mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input th:field="*{user.email}" type="text" class="form-control" id="firstName" placeholder="Enter first name" >
+        </div>
+        <div class="form-group mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input th:field="*{user.lastName}" type="text" class="form-control" id="lastName" placeholder="Enter last name">
+        </div>
+        <div class="form-group mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input th:field="*{user.firstName}" type="email" class="form-control" id="email" placeholder="Enter email">
+        </div>
+        <div class="form-group mb-3">
+            <label  class="form-label">Password</label>
+            <input th:field="*{user.password}" type="password" class="form-control" id="password" >
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location ="[[@{/user}]]";
+    }
+
+</script>
+</body>
+</html>
