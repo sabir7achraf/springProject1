@@ -16,6 +16,10 @@ public class UserService {
     public User save(User user) {
         return repo.save(user);
     }
+    
+    public User findById(int id) {
+        return repo.findById(id).get();
+    }
 
 
 }

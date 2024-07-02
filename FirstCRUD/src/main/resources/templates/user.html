@@ -8,6 +8,13 @@
 </head>
 <body>
 <div>
+    <div class="container"><br/>
+        <div th:if="${message}" class="alert alert-success">
+            <a href="#" class="close" data-dismiss="alert"
+               aria-label="close">×</a>
+            [[${message}]]
+        </div>
+        </div>
     <a href="/adduser">new user</a>
     <table class="table">
         <thead class="table-header">
@@ -23,7 +30,7 @@
             <td th:text="${user.firstName}"></td>
             <td th:text="${user.lastName}"></td>
             <td th:text="${user.email}"></td>
-            <td><a  class="btn btn-primary" th:href="@{/'edituser' + ${user.id}}"> edit User </a>
+            <td><a  class="btn btn-primary" th:href="@{'/edituser/' + ${user.id}}"> edit User </a>
                 <a th:href="@{/'delete' + ${user.id}}" class="btn btn-danger"> delete </a></td>
         </tr>
         </tbody>

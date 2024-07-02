@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -29,8 +31,16 @@ public class UserController {
     }
 
     @PostMapping("/saveuser")
-    public String saveUser(@ModelAttribute("user") User user) {
+    public String saveUser(@ModelAttribute("user") User user, RedirectAttributes re) {
         service.save(user);
+        re.addFlashAttribute("message", "User added successfully");
         return "redirect:/user";
+    }
+
+    @GetMapping("/edituser/{id}")
+    public String editUser(@PathVariable("id") Integer id, Model model) {
+        User user = service.findById(id);
+        model.addAttribute("user", user);
+        return "edituser";
     }
 }

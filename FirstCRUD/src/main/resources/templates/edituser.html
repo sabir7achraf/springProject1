@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.1.2/css/bootstrap.min.css}" />
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.1.2/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<h1 class="text-center my-4">Add User</h1>
+<div class="container d-flex justify-content-center align-items-center ">
+    <form th:action="@{/saveuser}" method="post"  class="w-50 p-4 border border-primary shadow" >
+        <div class="form-group mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input  type="text" class="form-control" id="firstName" th:value="${user.firstName}" >
+        </div>
+        <div class="form-group mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input  type="text" class="form-control" id="lastName" th:value="${user.lastName}">
+        </div>
+        <div class="form-group mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input  type="email" class="form-control" id="email" th:value="${user.email}">
+        </div>
+        <div class="form-group mb-3">
+            <label  class="form-label">Password</label>
+            <input  type="password" class="form-control" id="password" >
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" onclick="cancelForm()">Cancel</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location ="[[@{/user}]]";
+    }
+</script>
+</body>
+</html>
