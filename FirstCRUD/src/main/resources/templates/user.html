@@ -14,6 +14,11 @@
                aria-label="close">×</a>
             [[${message}]]
         </div>
+        <div th:if="${message2}" class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert"
+               aria-label="close">×</a>
+            [[${message2}]]
+        </div>
         </div>
     <a href="/adduser">new user</a>
     <table class="table">
@@ -31,7 +36,7 @@
             <td th:text="${user.lastName}"></td>
             <td th:text="${user.email}"></td>
             <td><a  class="btn btn-primary" th:href="@{'/edituser/' + ${user.id}}"> edit User </a>
-                <a th:href="@{/'delete' + ${user.id}}" class="btn btn-danger"> delete </a></td>
+                <a th:href="@{'/delete/' + ${user.id}}" class="btn btn-danger"> delete </a></td>
         </tr>
         </tbody>
     </table>
