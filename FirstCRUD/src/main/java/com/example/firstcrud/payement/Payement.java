@@ -20,7 +20,9 @@ public class Payement {
     @Enumerated(EnumType.STRING)
     private PayementEtat payementEtat;
 
-    private Date datePayement;
+    private Date datepayement;
+
+     private String file;
 
     @ManyToOne
     private User user;
