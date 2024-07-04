@@ -27,7 +27,7 @@ public class User {
         this.id = id;
     }
 
-    public String getLastName() {
+    public String getLastName(){
         return lastName;
     }
 
