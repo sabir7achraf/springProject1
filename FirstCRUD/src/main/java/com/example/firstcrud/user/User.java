@@ -1,14 +1,13 @@
 package com.example.firstcrud.user;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table
 @Getter @Setter @ToString @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 
 public class User {
     @Id

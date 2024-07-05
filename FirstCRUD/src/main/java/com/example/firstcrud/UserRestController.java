@@ -3,10 +3,12 @@ package com.example.firstcrud;
 import com.example.firstcrud.user.User;
 import com.example.firstcrud.user.UserService;
 import com.example.firstcrud.payement.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartRequest;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -14,6 +16,7 @@ public class UserRestController {
 
     UserService userService;
     PayementRepository payementRepository;
+
     public UserRestController(UserService userService,PayementRepository payementRepository) {
         this.userService = userService;
         this.payementRepository=payementRepository;
@@ -33,6 +36,12 @@ public class UserRestController {
     @GetMapping("/payement/{code}")
     public List<Payement> GetPaymentbycode(@PathVariable long code ){
         return payementRepository.findByUser_code(code);
+    }
+
+    @PostMapping(path = "/user" ,consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+    public void saveuser(@RequestParam MultipartFile file, Long code,String password,String email,String lastName,String firstName) throws IOException {
+
+        userService.save(userService.forImage(file,code,password,email,lastName,firstName));
     }
 
 
