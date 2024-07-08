@@ -1,7 +1,6 @@
 package com.example.firstcrud;
 
-import com.example.firstcrud.user.User;
-import com.example.firstcrud.user.UserService;
+import com.example.firstcrud.user.*;
 import com.example.firstcrud.payement.*;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,9 +17,11 @@ public class UserRestController {
     UserService userService;
     PayementRepository payementRepository;
     PasswordEncoder passwordEncoder;
-    public UserRestController(UserService userService,PayementRepository payementRepository) {
+
+    public UserRestController(UserService userService,PayementRepository payementRepository,PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.payementRepository=payementRepository;
+        this.passwordEncoder=passwordEncoder;
     }
 
     @GetMapping("/users")
@@ -41,10 +42,10 @@ public class UserRestController {
 
     @PostMapping(path = "/user" ,consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     public void saveuser(@RequestParam MultipartFile file, Long code,String password,String email,String lastName,String firstName) throws IOException {
+        Roles roles=new Roles();
+        roles.setRoleType(RoleType.UTULISATEUR);
         password=passwordEncoder.encode(password);
-        userService.save(userService.forImage(file,code,password,email,lastName,firstName));
+       Validation validuser= userService.valideUser(userService.save(userService.forImage(file,code,password,email,lastName,firstName,roles)));
+       userService.sendEmail(validuser);
     }
-
-
-
 }
