@@ -2,6 +2,9 @@ package com.example.firstcrud.user;
 
 
 
+
+import com.example.firstcrud.Entity.User;
+import com.example.firstcrud.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,8 @@ import java.util.List;
 
 @Controller
 public class UserController {
-    @Autowired private UserService service;
+    @Autowired
+   private UserService service;
 
     @GetMapping("/user")
     public String showUser(Model model) {
@@ -50,4 +54,5 @@ public class UserController {
         re.addFlashAttribute("message2", "User deleted successfully");
         return "redirect:/user";
     }
+
 }

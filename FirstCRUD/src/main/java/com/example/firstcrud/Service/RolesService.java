@@ -1,5 +1,7 @@
-package com.example.firstcrud.user;
+package com.example.firstcrud.Service;
 
+import com.example.firstcrud.Entity.Roles;
+import com.example.firstcrud.Repository.RolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

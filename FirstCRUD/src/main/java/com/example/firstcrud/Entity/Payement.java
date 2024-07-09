@@ -1,6 +1,5 @@
-package com.example.firstcrud.payement;
+package com.example.firstcrud.Entity;
 
-import com.example.firstcrud.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 

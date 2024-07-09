@@ -1,12 +1,14 @@
 package com.example.firstcrud;
 
-import com.example.firstcrud.user.*;
-import com.example.firstcrud.payement.*;
+
+import com.example.firstcrud.Repository.PayementRepository;
+import com.example.firstcrud.Service.RolesService;
+import com.example.firstcrud.Service.UserService;
+import com.example.firstcrud.Entity.*;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
 
 import java.io.IOException;
 import java.util.List;
@@ -52,13 +54,15 @@ public class UserRestController {
        Validation validuser= userService.valideUser(userService.save(userService.forImage(file,code,password,email,lastName,firstName,roles)));
        userService.sendEmail(validuser);
     }
-    @PostMapping("saveRoles")
+    @PostMapping("/saveRoles")
     public void saveRoles(@RequestBody Roles roles){
         roles = rolesService.save(roles);
     }
-    @GetMapping("show/roles")
+    @GetMapping("/show/roles")
     public List<Roles> getAllRoles(){
         List<Roles> ourRoles=rolesService.findAll();
         return ourRoles;
     }
+
+
 }

@@ -1,5 +1,9 @@
-package com.example.firstcrud.user;
+package com.example.firstcrud.Service;
 
+import com.example.firstcrud.Entity.Roles;
+import com.example.firstcrud.Entity.User;
+import com.example.firstcrud.Repository.UserRepository;
+import com.example.firstcrud.Entity.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

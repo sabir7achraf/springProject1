@@ -1,15 +1,13 @@
 package com.example.firstcrud;
 
-import com.example.firstcrud.user.User;
-import com.example.firstcrud.user.UserRepository;
+import com.example.firstcrud.Entity.User;
+import com.example.firstcrud.Repository.UserRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.annotation.Rollback;
-
-import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
