@@ -22,7 +22,7 @@ import java.util.UUID;
 public class UserService {
 
     @Autowired private UserRepository repo;
-    private JavaMailSender mailSender;
+    @Autowired JavaMailSender mailSender;
 
     public List<User> findAll() {
         return (List<User>) repo.findAll();
@@ -69,7 +69,7 @@ public class UserService {
 
     public  void sendEmail(Validation validation){
     SimpleMailMessage message = new SimpleMailMessage();
-    message.setFrom("achraf@sabir.com");
+    message.setFrom("sabirachraf032@gmail.com");
     message.setTo(validation.getUser().getEmail());
      String text=String.format("Bonjour %s ,<br/> votre code d'activation est %d <br/> MERCI POUR VOTRE INSCRIPTION ",validation.getUser().getFirstName(),validation.getCode());
         message.setText(text);

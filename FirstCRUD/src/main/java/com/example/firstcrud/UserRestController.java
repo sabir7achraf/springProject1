@@ -17,11 +17,14 @@ public class UserRestController {
     UserService userService;
     PayementRepository payementRepository;
     PasswordEncoder passwordEncoder;
+    RolesService rolesService;
 
-    public UserRestController(UserService userService,PayementRepository payementRepository,PasswordEncoder passwordEncoder) {
+
+    public UserRestController(UserService userService,PayementRepository payementRepository,PasswordEncoder passwordEncoder,RolesService rolesService) {
         this.userService = userService;
         this.payementRepository=payementRepository;
         this.passwordEncoder=passwordEncoder;
+        this.rolesService=rolesService;
     }
 
     @GetMapping("/users")
@@ -44,8 +47,18 @@ public class UserRestController {
     public void saveuser(@RequestParam MultipartFile file, Long code,String password,String email,String lastName,String firstName) throws IOException {
         Roles roles=new Roles();
         roles.setRoleType(RoleType.UTULISATEUR);
+        roles = rolesService.save(roles);
         password=passwordEncoder.encode(password);
        Validation validuser= userService.valideUser(userService.save(userService.forImage(file,code,password,email,lastName,firstName,roles)));
        userService.sendEmail(validuser);
+    }
+    @PostMapping("saveRoles")
+    public void saveRoles(@RequestBody Roles roles){
+        roles = rolesService.save(roles);
+    }
+    @GetMapping("show/roles")
+    public List<Roles> getAllRoles(){
+        List<Roles> ourRoles=rolesService.findAll();
+        return ourRoles;
     }
 }
