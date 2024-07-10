@@ -5,6 +5,7 @@ import com.example.firstcrud.Repository.PayementRepository;
 import com.example.firstcrud.Service.RolesService;
 import com.example.firstcrud.Service.UserService;
 import com.example.firstcrud.Entity.*;
+import com.example.firstcrud.Service.ValidationService;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,15 @@ public class UserRestController {
     PayementRepository payementRepository;
     PasswordEncoder passwordEncoder;
     RolesService rolesService;
+    ValidationService validationService;
 
 
-    public UserRestController(UserService userService,PayementRepository payementRepository,PasswordEncoder passwordEncoder,RolesService rolesService) {
+    public UserRestController(UserService userService,PayementRepository payementRepository,PasswordEncoder passwordEncoder,RolesService rolesService,ValidationService validationService) {
         this.userService = userService;
         this.payementRepository=payementRepository;
         this.passwordEncoder=passwordEncoder;
         this.rolesService=rolesService;
+        this.validationService= validationService;
     }
 
     @GetMapping("/users")
@@ -52,6 +55,7 @@ public class UserRestController {
         roles = rolesService.save(roles);
         password=passwordEncoder.encode(password);
        Validation validuser= userService.valideUser(userService.save(userService.forImage(file,code,password,email,lastName,firstName,roles)));
+       validationService.save(validuser);
        userService.sendEmail(validuser);
     }
     @PostMapping("/saveRoles")
@@ -63,6 +67,14 @@ public class UserRestController {
         List<Roles> ourRoles=rolesService.findAll();
         return ourRoles;
     }
-
+@PutMapping("/validUser")
+    public void validUser(@RequestBody int code){
+        Validation validUser=validationService.findbyCode(code);
+        if(validUser!=null){
+            User user=validUser.getUser();
+            user.setValidation(true);
+            userService.save(user);
+        }
+}
 
 }
