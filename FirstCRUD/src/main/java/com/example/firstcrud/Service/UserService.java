@@ -7,6 +7,9 @@ import com.example.firstcrud.Entity.Validation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +26,7 @@ import java.util.UUID;
 
 
 @Service
-public class UserService {
+public class UserService  implements UserDetailsService {
 
     @Autowired private UserRepository repo;
     @Autowired JavaMailSender mailSender;
@@ -81,6 +84,9 @@ public class UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        return this.repo.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
-
+    }
 }
