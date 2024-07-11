@@ -7,6 +7,7 @@ import com.example.firstcrud.Service.RolesService;
 import com.example.firstcrud.Service.UserService;
 import com.example.firstcrud.Entity.*;
 import com.example.firstcrud.Service.ValidationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -28,6 +29,7 @@ public class UserRestController {
     PasswordEncoder passwordEncoder;
     RolesService rolesService;
     ValidationService validationService;
+    @Autowired
     AuthenticationManager authenticationManager;
 
 
@@ -84,12 +86,12 @@ public class UserRestController {
         }
     }
 
-    @PostMapping("/connexion ")
+    @PostMapping("/connexion")
         public Map<String,String> connexion(@RequestBody AuthentificationDTO authe){
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authe.email(), authe.password())
         );
-        return null;
+return null;
     }
 
 }
