@@ -7,6 +7,7 @@ import com.example.firstcrud.Service.RolesService;
 import com.example.firstcrud.Service.UserService;
 import com.example.firstcrud.Entity.*;
 import com.example.firstcrud.Service.ValidationService;
+import com.example.firstcrud.securite.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -31,6 +32,8 @@ public class UserRestController {
     ValidationService validationService;
     @Autowired
     AuthenticationManager authenticationManager;
+    @Autowired
+    JwtService jwtService;
 
 
     public UserRestController(UserService userService,PayementRepository payementRepository,PasswordEncoder passwordEncoder,RolesService rolesService,ValidationService validationService) {
@@ -91,6 +94,9 @@ public class UserRestController {
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authe.email(), authe.password())
         );
+        if(authenticate.isAuthenticated()){
+           return  this.jwtService.generate(authe.email());
+        }
 return null;
     }
 
