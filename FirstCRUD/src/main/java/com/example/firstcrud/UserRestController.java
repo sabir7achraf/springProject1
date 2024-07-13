@@ -90,7 +90,7 @@ public class UserRestController {
     }
 
     @PostMapping("/connexion")
-        public Map<String,String> connexion(@RequestBody AuthentificationDTO authe){
+        public String connexion(@RequestBody AuthentificationDTO authe){
         Authentication authenticate = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(authe.email(), authe.password())
         );
