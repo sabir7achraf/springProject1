@@ -1,7 +1,9 @@
 package com.example.firstcrud.securite;
 
 import com.example.firstcrud.DTO.AuthentificationDTO;
+import com.example.firstcrud.Entity.Jwt;
 import com.example.firstcrud.Entity.User;
+import com.example.firstcrud.Repository.JwtRepository;
 import com.example.firstcrud.Service.UserService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -20,11 +22,24 @@ import java.util.function.Function;
 public class JwtService {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private JwtRepository jwtRepository;
     final String SecretKey="2722e6648a2a10ba4b772d7f6c9ad5ca9a5fb1b7791e5be35fcfcb11ddf76a7f";
 
     public String generate(String email){
         User user= (User) this.userService.loadUserByUsername(email);
-        return this.generateJwt(user) ;
+        final String barear = generateJwt(user);
+        final Jwt jwt=Jwt
+                .builder()
+                .valeur(barear)
+                .Expiration(false)
+                .validation(false)
+                .user(user)
+                .build();
+                this.jwtRepository.save(jwt);
+
+        return  barear;
     }
 
     private String generateJwt(User user) {
@@ -71,5 +86,9 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    public Jwt findByvaleur(String token) {
+        return jwtRepository.findByValeur(token).orElseThrow(()->new RuntimeException("Token inconnue"));
     }
 }

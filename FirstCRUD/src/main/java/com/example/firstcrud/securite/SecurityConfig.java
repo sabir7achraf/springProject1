@@ -30,13 +30,13 @@ public class SecurityConfig
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return
-                http.csrf(AbstractHttpConfigurer::disable).
-                        authorizeHttpRequests(
-                                authorize -> authorize.anyRequest().permitAll()
-                        ).sessionManagement(httpSecuritySessionManagementConfigurer->httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                        )
+                http.csrf(AbstractHttpConfigurer::disable)
+                        .authorizeHttpRequests(
+                                authorize -> authorize.anyRequest()
+                                                      .permitAll())
+                        .sessionManagement(
+                                httpSecuritySessionManagementConfigurer->httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .addFilterBefore(jwtFilter,UsernamePasswordAuthenticationFilter.class)
-
                         .build();
 
     }

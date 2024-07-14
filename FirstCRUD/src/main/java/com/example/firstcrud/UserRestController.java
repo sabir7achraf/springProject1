@@ -60,7 +60,7 @@ public class UserRestController {
         return payementRepository.findByUser_code(code);
     }
 
-    @PostMapping(path = "/user" ,consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(path = "/inscription" ,consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     public void saveuser(@RequestParam MultipartFile file, Long code,String password,String email,String lastName,String firstName) throws IOException {
         Roles roles=new Roles();
         roles.setRoleType(RoleType.UTULISATEUR);
