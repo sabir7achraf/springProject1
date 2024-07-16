@@ -11,6 +11,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -34,7 +35,7 @@ public class JwtService {
                 .builder()
                 .valeur(barear)
                 .Expiration(false)
-                .validation(false)
+                .validation(true)
                 .user(user)
                 .build();
                 this.jwtRepository.save(jwt);
@@ -90,5 +91,13 @@ public class JwtService {
 
     public Jwt findByvaleur(String token) {
         return jwtRepository.findByValeur(token).orElseThrow(()->new RuntimeException("Token inconnue"));
+    }
+
+    public void deconnexion() {
+        User user= (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+      Jwt jwt= this.jwtRepository.findUserValidationToken(user.getEmail(),true,false).orElseThrow(()->new RuntimeException("Token invalid"));
+      jwt.setExpiration(true);
+      jwt.setValidation(false);
+      this.jwtRepository.save(jwt);
     }
 }

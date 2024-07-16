@@ -99,5 +99,9 @@ public class UserRestController {
         }
 return null;
     }
+    @PostMapping("/deconnexion")
+    public  void  deconnexion(){
+        jwtService.deconnexion();
+    }
 
 }
