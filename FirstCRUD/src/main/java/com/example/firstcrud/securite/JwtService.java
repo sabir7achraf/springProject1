@@ -1,6 +1,5 @@
 package com.example.firstcrud.securite;
 
-import com.example.firstcrud.DTO.AuthentificationDTO;
 import com.example.firstcrud.Entity.Jwt;
 import com.example.firstcrud.Entity.User;
 import com.example.firstcrud.Repository.JwtRepository;
@@ -10,16 +9,21 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class JwtService {
     @Autowired
     private UserService userService;
@@ -30,11 +34,12 @@ public class JwtService {
 
     public String generate(String email){
         User user= (User) this.userService.loadUserByUsername(email);
+        this.disableTokens(user);
         final String barear = generateJwt(user);
         final Jwt jwt=Jwt
                 .builder()
                 .valeur(barear)
-                .Expiration(false)
+                .expiration(false)
                 .validation(true)
                 .user(user)
                 .build();
@@ -68,6 +73,16 @@ public class JwtService {
     public String loadUserName(String token) {
         return this.getClaim(token ,Claims::getSubject);
     }
+    private void disableTokens(User utilisateur) {
+        final List<Jwt> jwtList = this.jwtRepository.findUser(utilisateur.getEmail()).peek(
+                jwt -> {
+                    jwt.setValidation(false);
+                    jwt.setExpiration(true);
+                }
+        ).collect(Collectors.toList());
+
+        this.jwtRepository.saveAll(jwtList);
+    }
 
     public Boolean isExpired(String token) {
         Date expiration =this.getClaim(token ,Claims::getExpiration);
@@ -100,4 +115,11 @@ public class JwtService {
       jwt.setValidation(false);
       this.jwtRepository.save(jwt);
     }
+
+    @Scheduled(cron = "@daily")
+    public void removeUselessJwt() {
+        this.jwtRepository.deleteAllByExpirationAndValidation(true,false);
+    }
+
+
 }

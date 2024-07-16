@@ -17,8 +17,8 @@ public class Jwt {
     @GeneratedValue
     private int id;
     private String  valeur;
-    private Boolean Expiration;
-    private Boolean validation;
+    private Boolean expiration; //
+    private Boolean validation; //
     @ManyToOne
     private User user;
 
