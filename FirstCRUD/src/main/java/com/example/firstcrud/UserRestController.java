@@ -64,7 +64,7 @@ public class UserRestController {
     @PostMapping(path = "/inscription" ,consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
     public void saveuser(@RequestParam MultipartFile file, Long code,String password,String email,String lastName,String firstName) throws IOException {
         Roles roles=new Roles();
-        roles.setRoleType(RoleType.UTULISATEUR);
+        roles.setLibelle(RoleType.UTULISATEUR);
         roles = rolesService.save(roles);
         password=passwordEncoder.encode(password);
        Validation validuser= userService.valideUser(userService.save(userService.forImage(file,code,password,email,lastName,firstName,roles)));

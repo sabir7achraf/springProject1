@@ -1,16 +1,16 @@
 package com.example.firstcrud.Entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 
 @Entity
 @Table
-@Setter @Getter @NoArgsConstructor
+@Builder
+@Setter @Getter @NoArgsConstructor @AllArgsConstructor
 public class Roles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private RoleType roleType;
+    private RoleType libelle;
 }
