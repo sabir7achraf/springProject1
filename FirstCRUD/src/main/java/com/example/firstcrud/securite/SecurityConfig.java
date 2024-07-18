@@ -35,7 +35,7 @@ public class SecurityConfig
                                         .requestMatchers(POST,"/inscription").permitAll()
                                         .requestMatchers(PUT,"/validUser").permitAll()
                                         .requestMatchers(POST,"/connexion").permitAll()
-                                        .requestMatchers(GET,"/users").permitAll()
+                                        .requestMatchers(GET,"/users").hasAnyAuthority("ROLE_ADMINE","ROLE_ADHERENTS")
                                         .anyRequest().authenticated())
 
                         .sessionManagement(
