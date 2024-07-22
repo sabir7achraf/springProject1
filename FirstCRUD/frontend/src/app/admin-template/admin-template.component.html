@@ -19,9 +19,9 @@
       Register
     </button>
   </mat-menu>
-  <button mat-raised-button>About</button>
-  <button mat-raised-button>Contact</button>
-  <button mat-raised-button color="accent">Donate</button>
+  <button mat-button>About</button>
+  <button mat-button *ngIf="auth.authentifie">{{auth.user}}</button>
+  <button mat-button color="accent" (click)="logout()">Log Out</button>
 </mat-toolbar>
 
 <mat-drawer-container>

@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit{
     this.loginForm=this.fb.group({
       username : this.fb.control(''),
       password : this.fb.control('')
-
       }
     );
 

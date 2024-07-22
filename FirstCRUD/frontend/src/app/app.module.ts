@@ -20,6 +20,8 @@ import {MatCalendarHeader} from "@angular/material/datepicker";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput, MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
+import {Authguard} from "./guard/authguard.guard";
+import {AuthorizationGuardService} from "./guard/authorization-guard.service";
 
 
 
@@ -51,7 +53,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     ReactiveFormsModule
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),Authguard,AuthorizationGuardService
   ],
   bootstrap: [AppComponent]
 })
