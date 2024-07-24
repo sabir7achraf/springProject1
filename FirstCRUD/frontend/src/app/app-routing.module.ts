@@ -11,15 +11,12 @@ import {AuthorizationGuardService} from "./guard/authorization-guard.service";
 const routes: Routes = [
   {path: '' , component:LoginComponent},
   {path: 'login' , component:LoginComponent},
-  { path: 'admin' , component:AdminTemplateComponent,
+  {path: 'admin' , component:AdminTemplateComponent,
     canActivate : [Authguard],
     children:[
-    { path: 'home' , component:HomeComponent},
-  {path: 'users' , component:UsersComponent,
-  canActivate :[AuthorizationGuardService]
-  },
-  {path: 'payments' , component:PaymentsComponent
-  ,canActivate :[AuthorizationGuardService]
+    {path: 'home' , component:HomeComponent},
+    {path: 'users' , component:UsersComponent},
+    {path: 'payments' , component:PaymentsComponent
   }]
 
   }

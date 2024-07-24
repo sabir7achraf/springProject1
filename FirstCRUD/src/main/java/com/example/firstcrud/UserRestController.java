@@ -3,6 +3,7 @@ package com.example.firstcrud;
 
 import com.example.firstcrud.DTO.AuthentificationDTO;
 import com.example.firstcrud.Repository.PayementRepository;
+import com.example.firstcrud.Service.PayementService;
 import com.example.firstcrud.Service.RolesService;
 import com.example.firstcrud.Service.UserService;
 import com.example.firstcrud.Entity.*;
@@ -19,10 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.thymeleaf.expression.Maps;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 @RestController
+@CrossOrigin("*")
 
 public class UserRestController {
 
@@ -30,6 +33,8 @@ public class UserRestController {
     PayementRepository payementRepository;
     PasswordEncoder passwordEncoder;
     RolesService rolesService;
+    @Autowired
+    PayementService payementService;
     ValidationService validationService;
     @Autowired
     AuthenticationManager authenticationManager;
@@ -103,6 +108,11 @@ return null;
     @PostMapping("/deconnexion")
     public  void  deconnexion(){
         jwtService.deconnexion();
+    }
+
+    @PostMapping("/addPayment")
+    public void addPayment(Integer id, Date datePay, PayementEtat payementEtat, PayementType payementType){
+    this.payementService.Payments(id,datePay,payementEtat,payementType);
     }
 
 }

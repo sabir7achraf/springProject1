@@ -35,8 +35,8 @@ public class SecurityConfig
                                         .requestMatchers(POST,"/inscription").permitAll()
                                         .requestMatchers(PUT,"/validUser").permitAll()
                                         .requestMatchers(POST,"/connexion").permitAll()
-                                        .requestMatchers(GET,"/users").hasAnyAuthority("ROLE_ADMINE","ROLE_ADHERENTS")
-                                        .anyRequest().authenticated())
+//                                        .requestMatchers(GET,"/users").hasAnyAuthority("ROLE_ADMINE","ROLE_ADHERENTS")
+                                        .anyRequest().permitAll())
 
                         .sessionManagement(
                                 httpSecuritySessionManagementConfigurer->httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

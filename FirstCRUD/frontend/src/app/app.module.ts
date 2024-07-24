@@ -22,6 +22,10 @@ import {MatInput, MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
 import {Authguard} from "./guard/authguard.guard";
 import {AuthorizationGuardService} from "./guard/authorization-guard.service";
+import {MatTableModule} from "@angular/material/table";
+import {HttpClientModule} from "@angular/common/http";
+import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
+import {MatSort, MatSortModule} from "@angular/material/sort";
 
 
 
@@ -50,10 +54,14 @@ import {AuthorizationGuardService} from "./guard/authorization-guard.service";
     MatFormFieldModule,
     MatInputModule,
     MatCardActions,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule,
+    HttpClientModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [
-    provideAnimationsAsync(),Authguard,AuthorizationGuardService
+    provideAnimationsAsync(),Authguard,AuthorizationGuardService,
   ],
   bootstrap: [AppComponent]
 })
