@@ -7,6 +7,8 @@ import {PaymentsComponent} from "./payments/payments.component";
 import {AdminTemplateComponent} from "./admin-template/admin-template.component";
 import {Authguard} from "./guard/authguard.guard";
 import {AuthorizationGuardService} from "./guard/authorization-guard.service";
+import {NewUserComponent} from "./new-user/new-user.component";
+import {NewPaymentComponent} from "./new-payment/new-payment.component";
 
 const routes: Routes = [
   {path: '' , component:LoginComponent},
@@ -17,8 +19,9 @@ const routes: Routes = [
     {path: 'home' , component:HomeComponent},
     {path: 'users' , component:UsersComponent},
     {path: 'payments' , component:PaymentsComponent
-  }]
-
+  },
+{path:'newUser',component:NewUserComponent},
+  {path:'newPayment',component:NewPaymentComponent}]
   }
 
 ];

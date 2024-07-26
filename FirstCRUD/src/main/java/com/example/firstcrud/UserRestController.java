@@ -55,6 +55,11 @@ public class UserRestController {
        List<User> users = userService.findAll();
        return users;
     }
+    @PostMapping("/adduser")
+    public void AddUser(User user) {
+        this.userService.save(user);
+    }
+
 
     @GetMapping("/payments")
     public List<Payement> getAllpayements(){

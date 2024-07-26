@@ -16,16 +16,21 @@ import {MatDrawer, MatDrawerContainer, MatDrawerContent, MatSidenavModule} from 
 import {MatList, MatListItem, MatListModule} from "@angular/material/list";
 import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
-import {MatCalendarHeader} from "@angular/material/datepicker";
+import {MatCalendarHeader, MatDatepickerInput, MatDatepickerModule} from "@angular/material/datepicker";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput, MatInputModule} from "@angular/material/input";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Authguard} from "./guard/authguard.guard";
 import {AuthorizationGuardService} from "./guard/authorization-guard.service";
 import {MatTableModule} from "@angular/material/table";
 import {HttpClientModule} from "@angular/common/http";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
 import {MatSort, MatSortModule} from "@angular/material/sort";
+import { NewUserComponent } from './new-user/new-user.component';
+import { NewPaymentComponent } from './new-payment/new-payment.component';
+import {MatSelect, MatSelectModule} from "@angular/material/select";
+import {MatStepper, MatStepperModule} from "@angular/material/stepper";
+import {MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
 
 
 
@@ -36,7 +41,9 @@ import {MatSort, MatSortModule} from "@angular/material/sort";
     HomeComponent,
     UsersComponent,
     LoginComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    NewUserComponent,
+    NewPaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +65,12 @@ import {MatSort, MatSortModule} from "@angular/material/sort";
     MatTableModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule,
+    FormsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     provideAnimationsAsync(),Authguard,AuthorizationGuardService,

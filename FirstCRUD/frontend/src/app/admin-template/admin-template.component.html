@@ -5,8 +5,16 @@
   </button>
   <span style="flex: auto"></span>
   <button mat-button routerLink="/admin/home">Home</button>
-  <button mat-button>Service</button>
-  <button mat-button [matMenuTriggerFor]="profileMenu">Profile
+  <button mat-button [matMenuTriggerFor]="serviceMenu">
+    Service
+    <mat-icon>keyboard_arrow_down</mat-icon>
+    <mat-menu #serviceMenu>
+      <button mat-menu-item routerLink="/admin/newUser"> Add user</button>
+      <button mat-menu-item routerLink="/admin/newPayment"> Add Payment</button>
+    </mat-menu>
+  </button>
+  <button mat-button [matMenuTriggerFor]="profileMenu">
+    Profile
     <mat-icon>keyboard_arrow_down</mat-icon>
   </button>
   <mat-menu #profileMenu>
