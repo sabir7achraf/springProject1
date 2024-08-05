@@ -2,6 +2,7 @@ package com.example.firstcrud;
 
 
 import com.example.firstcrud.DTO.AuthentificationDTO;
+import com.example.firstcrud.DTO.UserDTO;
 import com.example.firstcrud.Repository.PayementRepository;
 import com.example.firstcrud.Service.PayementService;
 import com.example.firstcrud.Service.RolesService;
@@ -25,8 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin("*")
 
+@CrossOrigin("*")
 public class UserRestController {
 
     UserService userService;
@@ -56,7 +57,7 @@ public class UserRestController {
        return users;
     }
     @PostMapping("/adduser")
-    public void AddUser(User user) {
+    public void AddUser(@RequestParam("file") MultipartFile file,  User user) {
         this.userService.save(user);
     }
 
@@ -71,13 +72,13 @@ public class UserRestController {
         return payementRepository.findByUser_code(code);
     }
 
-    @PostMapping(path = "/inscription" ,consumes= MediaType.MULTIPART_FORM_DATA_VALUE)
-    public void saveuser(@RequestParam MultipartFile file, Long code,String password,String email,String lastName,String firstName) throws IOException {
+    @PostMapping(path = "/inscription" )
+    public void saveuser(UserDTO userDto) throws IOException {
         Roles roles=new Roles();
         roles.setLibelle(RoleType.UTULISATEUR);
         roles = rolesService.save(roles);
-        password=passwordEncoder.encode(password);
-       Validation validuser= userService.valideUser(userService.save(userService.forImage(file,code,password,email,lastName,firstName,roles)));
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+       Validation validuser= userService.valideUser(userService.save(userService.forImage( userDto,roles)));
        validationService.save(validuser);
        userService.sendEmail(validuser);
     }
@@ -101,12 +102,12 @@ public class UserRestController {
     }
 
     @PostMapping("/connexion")
-        public String connexion(@RequestBody AuthentificationDTO authe){
+        public String connexion(@RequestBody AuthentificationDTO authedto){
         Authentication authenticate = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authe.email(), authe.password())
+                new UsernamePasswordAuthenticationToken(authedto.email(), authedto.password())
         );
         if(authenticate.isAuthenticated()){
-           return  this.jwtService.generate(authe.email());
+           return  this.jwtService.generate(authedto.email());
         }
 return null;
     }

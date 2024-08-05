@@ -1,14 +1,7 @@
 <div class="container">
-    <mat-card>
-       <mat-card-header>
-          <mat-card-title>
-            our home page
-          </mat-card-title>
-       </mat-card-header>
-      <mat-divider></mat-divider>
-      <mat-card-content>
-        Ha nta o ha nta yalala
-      </mat-card-content>
-    </mat-card>
+  <mat-card class="demo-inline-calendar-card">
+    <mat-calendar [(selected)]="selected"></mat-calendar>
+  </mat-card>
+  <p>Selected date: {{selected()}}</p>
 
 </div>

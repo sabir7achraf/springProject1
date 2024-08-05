@@ -73,6 +73,7 @@ public class JwtService {
     public String loadUserName(String token) {
         return this.getClaim(token ,Claims::getSubject);
     }
+
     private void disableTokens(User utilisateur) {
         final List<Jwt> jwtList = this.jwtRepository.findUser(utilisateur.getEmail()).peek(
                 jwt -> {

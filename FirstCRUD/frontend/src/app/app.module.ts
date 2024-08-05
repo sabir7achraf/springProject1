@@ -16,12 +16,10 @@ import {MatDrawer, MatDrawerContainer, MatDrawerContent, MatSidenavModule} from 
 import {MatList, MatListItem, MatListModule} from "@angular/material/list";
 import {MatButton, MatButtonModule, MatIconButton} from "@angular/material/button";
 import {MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
-import {MatCalendarHeader, MatDatepickerInput, MatDatepickerModule} from "@angular/material/datepicker";
+import {MatCalendar, MatCalendarHeader, MatDatepickerInput, MatDatepickerModule} from "@angular/material/datepicker";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {MatInput, MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {Authguard} from "./guard/authguard.guard";
-import {AuthorizationGuardService} from "./guard/authorization-guard.service";
 import {MatTableModule} from "@angular/material/table";
 import {HttpClientModule} from "@angular/common/http";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
@@ -31,6 +29,9 @@ import { NewPaymentComponent } from './new-payment/new-payment.component';
 import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatStepper, MatStepperModule} from "@angular/material/stepper";
 import {MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/core";
+import {MatProgressBar, MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatGridList, MatGridListModule} from "@angular/material/grid-list";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -70,10 +71,14 @@ import {MatNativeDateModule, provideNativeDateAdapter} from "@angular/material/c
     FormsModule,
     MatStepperModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatProgressBarModule,
+    MatGridListModule,
+    MatCalendar,
+    RouterModule
   ],
   providers: [
-    provideAnimationsAsync(),Authguard,AuthorizationGuardService,
+    provideAnimationsAsync()
   ],
   bootstrap: [AppComponent]
 })

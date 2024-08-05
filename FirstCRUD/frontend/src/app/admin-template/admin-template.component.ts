@@ -11,7 +11,6 @@ export class AdminTemplateComponent {
  constructor(private router: Router,public auth : AuthService) {
  }
   logout() {
-   this.auth.logout();
    this.router.navigateByUrl('login')
   }
 }

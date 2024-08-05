@@ -1,5 +1,6 @@
 package com.example.firstcrud.Service;
 
+import com.example.firstcrud.DTO.UserDTO;
 import com.example.firstcrud.Entity.Roles;
 import com.example.firstcrud.Entity.User;
 import com.example.firstcrud.Repository.UserRepository;
@@ -45,19 +46,21 @@ public class UserService  implements UserDetailsService {
     public void delete(int id) {
         repo.deleteById(id);
     }
-    public User forImage(MultipartFile file, Long code,String password,String email,String lastName,String firstName, Roles roles) throws IOException {
-        Path folderPath = Paths.get(System.getProperty("user.home"),"fst-spring","userimage");
-        if(!Files.exists(folderPath)){
-            Files.createDirectories(folderPath);
-        }
-        String fileName= UUID.randomUUID().toString();
-        Path filePath=Paths.get(System.getProperty("user.home"),"fst-spring","userimage",fileName+".jpg");
-        Files.copy(file.getInputStream(),filePath);
+    public User forImage(UserDTO userDTO, Roles roles) throws IOException {
+//        Path folderPath = Paths.get(System.getProperty("user.home"),"fst-spring","userimage");
+//        if(!Files.exists(folderPath)){
+//            Files.createDirectories(folderPath);
+//        }
+//        String fileName= UUID.randomUUID().toString();
+//        Path filePath=Paths.get(System.getProperty("user.home"),"fst-spring","userimage",fileName+".jpg");
+//        Files.copy(file.getInputStream(),filePath);
 
-        return User.builder().image(fileName)
-                .code(code).email(email)
-                .firstName(firstName).lastName(lastName)
-                .password(password)
+        return User.builder()
+//                .image(fileName)
+                .code(userDTO.getCode())
+                .email(userDTO.getEmail())
+                .firstName(userDTO.getFirstName()).lastName(userDTO.getLastName())
+                .password(userDTO.getPassword())
                 .roles(roles)
                 .build();
     }
